@@ -1,4 +1,5 @@
 import Slideshow from '../components/Slideshow';
+import Projects from '../components/Project'; 
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
 
       <section id="projects" className="py-20 text-center">
         <h2 className="text-4xl font-bold mb-5">Projects</h2>
+        <Projects /> {/* Include the Projects component here */}
       </section>
 
       <section id="contact" className="py-20 text-center bg-gray-100">
