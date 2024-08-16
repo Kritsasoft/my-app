@@ -3,10 +3,11 @@ import Slideshow from '../components/Slideshow';
 const Home = () => {
   return (
     <>
-      <section id="home" className="h-screen bg-cover bg-center" style={{ backgroundImage: "url('/images/hero.jpg')" }}>
-        <div className="h-full flex flex-col justify-center items-center">
-          <h1 className="text-5xl font-bold text-white">Welcome to My Portfolio</h1>
-          <p className="text-white mt-4">Software Engineer | Web Developer | Designer</p>
+      <section id="home" className="h-screen">
+        <Slideshow />
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center">
+          <h1 className="text-5xl font-bold text-white">Hello I'm Kritsakorn Sukkasem</h1>
+          <p className="text-white mt-4">Software Engineer Student | Web Developer </p>
         </div>
       </section>
 
@@ -20,7 +21,6 @@ const Home = () => {
 
       <section id="projects" className="py-20 text-center">
         <h2 className="text-4xl font-bold mb-5">Projects</h2>
-        <Slideshow />
       </section>
 
       <section id="contact" className="py-20 text-center bg-gray-100">
