@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #fff2d5; 
+  color: #333; 
+  font-family: 'Arial', sans-serif;
+}
+
+section {
+  background-color: antiquewhite;
+}
+
+
+#about, #project, #contact {
+  background-color: #f7f7f7;
+}
