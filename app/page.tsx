@@ -9,12 +9,16 @@ const Home = () => {
   const [isAboutVisible, setIsAboutVisible] = useState(false);
   const [isProjectsVisible, setIsProjectsVisible] = useState(false);
   const [isContactVisible, setIsContactVisible] = useState(false);
+  const [isHomeVisible, setIsHomeVisible] = useState(false);
 
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
 
   useEffect(() => {
+    // Trigger fade-in for the home section after the page loads
+    setIsHomeVisible(true);
+
     const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -49,17 +53,20 @@ const Home = () => {
 
   return (
     <>
-      <section id="home" className="h-screen">
+      <section
+        id="home"
+        className={`h-screen fade-in ${isHomeVisible ? 'visible' : ''}`}
+      >
         <Slideshow />
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center">
-          <h1 className="text-5xl font-bold text-white">Hello, I'm Kritsakorn Sukkasem</h1>
-          <p className="text-white mt-4">Software Engineer Student | Web Developer </p>
+          <h1 className="text-5xl font-bold text-gray">Hello, I'm Kritsakorn Sukkasem</h1>
+          <p className="text-gray mt-4">Software Engineer Student | Web Developer</p>
         </div>
       </section>
 
       <section
         id="about"
-        className={`py-20 text-center bg-gray-100 fade-in ${isAboutVisible ? 'visible' : ''}`}
+        className={`py-20 text-center bg-gray-100 fade-in ${isAboutVisible ? 'visible' : ''}`} 
         ref={aboutRef}
       >
         <h2 className="text-4xl font-bold mb-5">About Me</h2>

@@ -1,7 +1,8 @@
-// components/Skills.tsx
-"use client"; // Mark this as a client component
+
+"use client"; 
 
 import { FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaPython, FaJava, FaJsSquare, FaDatabase } from 'react-icons/fa';
+import { FaGolang } from 'react-icons/fa6';
 import { SiC, SiCplusplus, SiTypescript, SiGoland, SiDart, SiNestjs, SiSpringboot, SiMongodb, SiMysql, SiNextdotjs, SiVuedotjs, SiNuxtdotjs } from 'react-icons/si';
 
 const Skills = () => {
@@ -16,7 +17,7 @@ const Skills = () => {
           <FaPython size={40} />
           <FaJsSquare size={40} />
           <SiTypescript size={40} />
-          <SiGoland size={40} />
+          <FaGolang size={40} />
           <SiDart size={40} />
           <FaJava size={40} />
         </div>
@@ -26,7 +27,7 @@ const Skills = () => {
           <SiNestjs size={40} />
           <SiSpringboot size={40} />
           <FaNodeJs size={40} />
-          <SiGoland size={40} />
+          <FaGolang size={40} />
         </div>
 
         <h3 className="text-2xl font-semibold mb-3">Frontend</h3>
