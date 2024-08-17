@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Slideshow from '../components/Slideshow';
 import Projects from '../components/Project'; 
+import Skills from '../components/Skills';
 
 const Home = () => {
   const [isAboutVisible, setIsAboutVisible] = useState(false);
@@ -67,6 +68,8 @@ const Home = () => {
           My focus is on clean design and high-quality code.
         </p>
       </section>
+
+      <Skills />
 
       <section
         id="projects"

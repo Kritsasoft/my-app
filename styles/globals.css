@@ -3,14 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color:antiquewhite; 
+  background-color: antiquewhite; 
   color: #333; 
   font-family: 'Arial', sans-serif;
 }
@@ -37,6 +35,7 @@ body {
   opacity: 1;
 }
 
+/* Fade-in Effect Styles */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -48,3 +47,29 @@ body {
   transform: translateY(0);
 }
 
+/* Custom Scrollbar Styles */
+body {
+  --sb-track-color: #232E33;
+  --sb-thumb-color: #6BAF8D;
+  --sb-size: 14px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 3px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 3px;
+}
+
+@supports not(selector(::-webkit-scrollbar)) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}
