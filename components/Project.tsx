@@ -6,17 +6,47 @@ const Projects = () => {
   const [repos, setRepos] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchRepos = async () => {
+    const fetchPinnedRepos = async () => {
+      const query = `
+        {
+          user(login: "Kritsasoft") {
+            pinnedItems(first: 6, types: REPOSITORY) {
+              nodes {
+                ... on Repository {
+                  id
+                  name
+                  description
+                  url
+                  languages(first: 3) {
+                    nodes {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
       try {
-        const response = await fetch('https://api.github.com/users/Kritsasoft/repos');
-        const data = await response.json();
-        setRepos(data);
+        const response = await fetch('https://api.github.com/graphql', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+          },
+          body: JSON.stringify({ query }),
+        });
+
+        const { data } = await response.json();
+        setRepos(data.user.pinnedItems.nodes);
       } catch (error) {
-        console.error("Error fetching GitHub repos:", error);
+        console.error("Error fetching pinned GitHub repos:", error);
       }
     };
 
-    fetchRepos();
+    fetchPinnedRepos();
   }, []);
 
   return (
@@ -28,10 +58,12 @@ const Projects = () => {
           <div className="mt-4">
             <h4 className="font-bold">Languages Used:</h4>
             <ul>
-              {repo.language && <li>{repo.language}</li>}
+              {repo.languages.nodes.map((language: any) => (
+                <li key={language.name}>{language.name}</li>
+              ))}
             </ul>
           </div>
-          <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline mt-4 block">
+          <a href={repo.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline mt-4 block">
             View on GitHub
           </a>
         </div>
