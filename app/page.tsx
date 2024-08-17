@@ -73,7 +73,7 @@ const Home = () => {
 
       <Skills />
 
-      <Activities /> {/* Add the Activities section here */}
+      <Activities /> 
 
       <section
         id="projects"
