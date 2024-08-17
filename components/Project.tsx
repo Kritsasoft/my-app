@@ -1,9 +1,11 @@
 "use client"; // Mark this as a client component
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const Projects = () => {
   const [repos, setRepos] = useState<any[]>([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     const fetchPinnedRepos = async () => {
@@ -49,8 +51,33 @@ const Projects = () => {
     fetchPinnedRepos();
   }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 } // Adjust this threshold for earlier/later fade-in
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      ref={sectionRef}
+      className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in ${isVisible ? 'visible' : ''}`}
+    >
       {repos.map((repo) => (
         <div key={repo.id} className="p-5 border rounded-lg shadow-lg">
           <h3 className="text-2xl font-bold">{repo.name}</h3>
