@@ -1,5 +1,5 @@
-// _app.tsx
-import '../styles/globals.css'; // Adjust the path according to your project structure
+
+import '../styles/globals.css'; 
 
 import { ReactNode, ComponentType } from 'react';
 
