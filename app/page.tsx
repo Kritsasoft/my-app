@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import Slideshow from '../components/Slideshow';
 import Projects from '../components/Project'; 
 import Skills from '../components/Skills';
-import Activities from '../components/Activities'; // Import the Activities component
+import Activities from '../components/Activities'; 
 
 const Home = () => {
   const [isHomeVisible, setIsHomeVisible] = useState(false);
