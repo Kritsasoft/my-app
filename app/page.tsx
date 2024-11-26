@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import { useEffect, useState, useRef } from 'react';
 import Slideshow from '../components/Slideshow';
@@ -52,11 +52,12 @@ const Home = () => {
 
   return (
     <>
-      <section id="home" className="h-screen">
+      <section id="home" className="h-screen relative">
         <Slideshow />
-        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center">
-          <h1 className="text-5xl font-bold text-gray-800">Hello, I'm Kritsakorn Sukkasem</h1>
-          <p className="text-gray-800 mt-4">Software Engineer Student | Web Developer</p>
+        <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start z-10 px-12">
+          <pre className="text-3xl font-bold text-gray-800 text-left font-mono whitespace-pre-wrap">
+            {'<Hello, I\'m Kritsakorn Sukkasem\nSoftware Engineer Student | Web Developer />'}
+          </pre>
         </div>
       </section>
 
@@ -65,10 +66,12 @@ const Home = () => {
         className={`py-20 text-center bg-gray-100 fade-in ${isAboutVisible ? 'visible' : ''}`}
         ref={aboutRef}
       >
-        <h2 className="text-4xl font-bold mb-5">About Me</h2>
-        <p className="max-w-2xl mx-auto">
-          I am a Software Engineering student passionate about creating modern and efficient web applications.
-          My focus is on clean design and high-quality code.
+        <pre className="text-4xl font-bold mb-5 text-left font-mono whitespace-pre-wrap text-center">
+          {'About Me '}
+        </pre>
+        <p className="max-w-2xl mx-auto font-mono text-gray-800">
+          {'I am a Software Engineering student passionate about creating modern and efficient web applications.'}
+          {' My focus is on clean design and high-quality code.'}
         </p>
       </section>
 
@@ -81,7 +84,9 @@ const Home = () => {
         className={`py-20 text-center fade-in ${isProjectsVisible ? 'visible' : ''}`}
         ref={projectsRef}
       >
-        <h2 className="text-4xl font-bold mb-5">Projects</h2>
+        <pre className="text-4xl font-bold mb-5 text-left font-mono whitespace-pre-wrap text-center">
+          {'<Projects/>'}
+        </pre>
         <Projects />
       </section>
 
@@ -90,9 +95,11 @@ const Home = () => {
         className={`py-20 text-center bg-gray-100 fade-in ${isContactVisible ? 'visible' : ''}`}
         ref={contactRef}
       >
-        <h2 className="text-4xl font-bold mb-5">Contact</h2>
-        <p className="max-w-2xl mx-auto">
-          Get in touch with me through email or social media. I am always open to discussing new opportunities or collaborations.
+        <pre className="text-4xl font-bold mb-5 text-left font-mono whitespace-pre-wrap text-center">
+          {'<Contact/>'}
+        </pre>
+        <p className="max-w-2xl mx-auto font-mono text-gray-800">
+          {'Get in touch with me through email or social media. I am always open to discussing new opportunities or collaborations.'}
         </p>
         <div className="flex justify-center space-x-6 mt-8">
           <a href="mailto:candystd1@gmail.com" target="_blank" rel="noopener noreferrer">

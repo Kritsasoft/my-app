@@ -24,7 +24,7 @@ const activities = [
 const Activities = () => {
   return (
     <section id="activities" className="py-20 text-center bg-white">
-      <h2 className="text-4xl font-bold mb-8">University Activities</h2>
+      <h2 className="text-4xl font-bold mb-8 font-mono whitespace-pre-wrap">University Activities</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
         {activities.map((activity, index) => (
           <div key={index} className="p-5 border rounded-lg shadow-lg">
@@ -33,8 +33,8 @@ const Activities = () => {
               alt={activity.title}
               className="w-full h-48 object-cover rounded-lg"
             />
-            <h3 className="text-2xl font-bold mt-4">{activity.title}</h3>
-            <p className="mt-2">{activity.description}</p>
+            <h3 className="text-2xl font-bold mt-4 font-mono whitespace-pre-wrap">{activity.title}</h3>
+            <p className="mt-2 font-mono whitespace-pre-wrap">{activity.description}</p>
           </div>
         ))}
       </div>
