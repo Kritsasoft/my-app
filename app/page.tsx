@@ -1,10 +1,11 @@
-"use client"; // Mark this as a client component
+"use client"; 
 
 import { useEffect, useState, useRef } from 'react';
 import Slideshow from '../components/Slideshow';
 import Projects from '../components/Project'; 
 import Skills from '../components/Skills';
 import Activities from '../components/Activities'; 
+import { FaGithub, FaInstagram, FaFacebook, FaEnvelope } from 'react-icons/fa';
 
 const Home = () => {
   const [isHomeVisible, setIsHomeVisible] = useState(false);
@@ -93,6 +94,20 @@ const Home = () => {
         <p className="max-w-2xl mx-auto">
           Get in touch with me through email or social media. I am always open to discussing new opportunities or collaborations.
         </p>
+        <div className="flex justify-center space-x-6 mt-8">
+          <a href="mailto:candystd1@gmail.com" target="_blank" rel="noopener noreferrer">
+            <FaEnvelope className="text-3xl text-gray-800 hover:text-gray-500" />
+          </a>
+          <a href="https://github.com/Kritsasoft" target="_blank" rel="noopener noreferrer">
+            <FaGithub className="text-3xl text-gray-800 hover:text-gray-500" />
+          </a>
+          <a href="https://www.instagram.com/yawarakai09_/" target="_blank" rel="noopener noreferrer">
+            <FaInstagram className="text-3xl text-gray-800 hover:text-gray-500" />
+          </a>
+          <a href="https://www.facebook.com/KSKCaNdYS/" target="_blank" rel="noopener noreferrer">
+            <FaFacebook className="text-3xl text-gray-800 hover:text-gray-500" />
+          </a>
+        </div>
       </section>
     </>
   );
