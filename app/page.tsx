@@ -16,6 +16,7 @@ const Home = () => {
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
+  const homeRef = useRef(null); // ใช้ ref สำหรับ section 'home'
 
   useEffect(() => {
     const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -27,6 +28,8 @@ const Home = () => {
             setIsProjectsVisible(true);
           } else if (entry.target.id === 'contact') {
             setIsContactVisible(true);
+          } else if (entry.target.id === 'home') {
+            setIsHomeVisible(true); // ทำให้ข้อความใน home ปรากฏ
           }
           observer.unobserve(entry.target);
         }
@@ -42,20 +45,22 @@ const Home = () => {
     if (aboutRef.current) observer.observe(aboutRef.current);
     if (projectsRef.current) observer.observe(projectsRef.current);
     if (contactRef.current) observer.observe(contactRef.current);
+    if (homeRef.current) observer.observe(homeRef.current); // Observe home section
 
     return () => {
       if (aboutRef.current) observer.unobserve(aboutRef.current);
       if (projectsRef.current) observer.unobserve(projectsRef.current);
       if (contactRef.current) observer.unobserve(contactRef.current);
+      if (homeRef.current) observer.unobserve(homeRef.current); // Unobserve home section
     };
   }, []);
 
   return (
     <>
-      <section id="home" className="h-screen relative">
+      <section id="home" className="h-screen relative" ref={homeRef}>
         <Slideshow />
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start z-10 px-12">
-          <pre className="text-3xl font-bold text-gray-800 text-left font-mono whitespace-pre-wrap">
+          <pre className={`text-3xl font-bold text-gray-800 text-left font-mono whitespace-pre-wrap fade-in-from-left ${isHomeVisible ? 'visible' : ''}`}>
             {'<Hello, I\'m Kritsakorn Sukkasem\nSoftware Engineer Student | Web Developer />'}
           </pre>
         </div>

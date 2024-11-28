@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const activities = [
   {
@@ -10,7 +10,7 @@ const activities = [
   },
   {
     image: '/images/hack2023.jpg',
-    title: 'Hacathon 2023',
+    title: 'Hackathon 2023',
     description: 'Participated in the Software Engineering hackathon competition.',
   },
   {
@@ -22,12 +22,32 @@ const activities = [
 ];
 
 const Activities = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const section = document.getElementById('activities');
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom >= 0) {
+          setIsVisible(true);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section id="activities" className="py-20 text-center bg-white">
       <h2 className="text-4xl font-bold mb-8 font-mono whitespace-pre-wrap">University Activities</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
         {activities.map((activity, index) => (
-          <div key={index} className="p-5 border rounded-lg shadow-lg">
+          <div
+            key={index}
+            className={`activity-box activity-box-modern ${isVisible ? (index % 2 === 0 ? 'activity-box-left' : 'activity-box-right') : ''}`}
+          >
             <img
               src={activity.image}
               alt={activity.title}

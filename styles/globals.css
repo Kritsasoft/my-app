@@ -111,7 +111,7 @@ header {
 }
 
 .bg-blur {
-  background-color: rgba(255, 255, 255, 0.835); 
+  background-color: rgba(255, 254, 247, 0.907); 
   backdrop-filter: blur(500px); 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -138,4 +138,62 @@ header {
 .nav-link:hover::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.activity-box {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.activity-box-left {
+  animation-name: slideInLeft;
+}
+
+.activity-box-right {
+  animation-name: slideInRight;
+}
+
+.activity-box-modern {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity-box-modern:hover {
+  transform: translateY(-0.5rem);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.activity-card {
+  max-width: 300px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
