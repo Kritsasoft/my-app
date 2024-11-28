@@ -16,7 +16,10 @@ const Home = () => {
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
-  const homeRef = useRef(null); // ใช้ ref สำหรับ section 'home'
+  const homeRef = useRef(null); 
+
+  const [text, setText] = useState('');
+  const [typingSpeed] = useState(50); 
 
   useEffect(() => {
     const observerCallback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
@@ -29,7 +32,7 @@ const Home = () => {
           } else if (entry.target.id === 'contact') {
             setIsContactVisible(true);
           } else if (entry.target.id === 'home') {
-            setIsHomeVisible(true); // ทำให้ข้อความใน home ปรากฏ
+            setIsHomeVisible(true); 
           }
           observer.unobserve(entry.target);
         }
@@ -55,13 +58,31 @@ const Home = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const targetText = "<Hello, I'm Kritsakorn Sukkasem\nSoftware Engineer Student | Web Developer />";
+    let currentText = '';
+    let index = 0;
+
+    const typeText = () => {
+      if (index < targetText.length) {
+        currentText += targetText.charAt(index);
+        setText(currentText);
+        index++;
+        setTimeout(typeText, typingSpeed);
+      }
+    };
+
+    typeText(); 
+
+  }, []);
+
   return (
     <>
-      <section id="home" className="h-screen relative" ref={homeRef}>
+      <section id="home" className="h-screen relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800" ref={homeRef}>
         <Slideshow />
         <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-start z-10 px-12">
-          <pre className={`text-3xl font-bold text-gray-800 text-left font-mono whitespace-pre-wrap fade-in-from-left ${isHomeVisible ? 'visible' : ''}`}>
-            {'<Hello, I\'m Kritsakorn Sukkasem\nSoftware Engineer Student | Web Developer />'}
+          <pre className={`text-3xl font-bold text-blue-500 text-left font-mono whitespace-pre-wrap transition-all duration-500 ${isHomeVisible ? 'visible' : ''}`}>
+            {text}
           </pre>
         </div>
       </section>
@@ -71,8 +92,8 @@ const Home = () => {
         className={`py-20 text-center bg-gray-100 fade-in ${isAboutVisible ? 'visible' : ''}`}
         ref={aboutRef}
       >
-        <pre className="text-4xl font-bold mb-5 text-left font-mono whitespace-pre-wrap text-center">
-          {'About Me '}
+        <pre className="text-4xl font-bold mb-5 text-left font-mono text-center">
+          {'About Me'}
         </pre>
         <p className="max-w-2xl mx-auto font-mono text-gray-800">
           {'I am a Software Engineering student passionate about creating modern and efficient web applications.'}
@@ -82,14 +103,14 @@ const Home = () => {
 
       <Skills />
 
-      <Activities /> 
+      <Activities />
 
       <section
         id="projects"
         className={`py-20 text-center fade-in ${isProjectsVisible ? 'visible' : ''}`}
         ref={projectsRef}
       >
-        <pre className="text-4xl font-bold mb-5 text-left font-mono whitespace-pre-wrap text-center">
+        <pre className="text-4xl font-bold mb-5 text-left font-mono text-center">
           {'<Projects/>'}
         </pre>
         <Projects />
@@ -100,7 +121,7 @@ const Home = () => {
         className={`py-20 text-center bg-gray-100 fade-in ${isContactVisible ? 'visible' : ''}`}
         ref={contactRef}
       >
-        <pre className="text-4xl font-bold mb-5 text-left font-mono whitespace-pre-wrap text-center">
+        <pre className="text-4xl font-bold mb-5 text-left font-mono text-center">
           {'<Contact/>'}
         </pre>
         <p className="max-w-2xl mx-auto font-mono text-gray-800">
