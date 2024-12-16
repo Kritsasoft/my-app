@@ -110,9 +110,6 @@ const Home = () => {
         className={`py-20 text-center fade-in ${isProjectsVisible ? 'visible' : ''}`}
         ref={projectsRef}
       >
-        <pre className="text-4xl font-bold mb-5 text-left font-mono text-center">
-          {'<Projects/>'}
-        </pre>
         <Projects />
       </section>
 

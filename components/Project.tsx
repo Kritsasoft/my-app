@@ -1,11 +1,88 @@
-"use client"; // Mark this as a client component
+"use client";
 
 import { useEffect, useState, useRef } from 'react';
+import { Github, Code, Layers, Database, Terminal, Cpu } from 'lucide-react';
+
+type Repository = {
+  id: string;
+  name: string;
+  description: string;
+  url: string;
+  languages: {
+    nodes: Array<{ name: string }>
+  }
+};
+
+const LanguageIcons: { [key: string]: JSX.Element } = {
+  'JavaScript': <Terminal className="w-5 h-5 text-yellow-500" />,
+  'TypeScript': <Cpu className="w-5 h-5 text-blue-500" />,
+  'Python': <Code className="w-5 h-5 text-green-500" />,
+  'React': <Layers className="w-5 h-5 text-cyan-600" />,
+  'Next.js': <Cpu className="w-5 h-5 text-black" />,
+  'HTML': <Code className="w-5 h-5 text-orange-500" />,
+  'CSS': <Code className="w-5 h-5 text-indigo-500" />,
+  'Java': <Database className="w-5 h-5 text-red-500" />,
+  'default': <Code className="w-5 h-5 text-gray-500" />
+};
+
+const ProjectCard = ({ repo }: { repo: Repository }) => {
+  return (
+    <div className="skill-card relative overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-lg dark:bg-gray-800">
+      <div className="relative p-6 space-y-5">
+        <div className="flex justify-center items-center">
+          <h3 className="text-2xl font-bold text-gray-800 capitalize tracking-wide text-center dark:text-gray-100">
+            {repo.name.replace(/[-_]/g, ' ')}
+          </h3>
+        </div>
+
+        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 dark:bg-gray-700 dark:border-gray-600">
+          <p className="text-gray-600 text-sm min-h-[60px] italic text-center dark:text-gray-300">
+            {repo.description || 'No description available'}
+          </p>
+        </div>
+
+        <div className="border-t border-gray-100 pt-4 dark:border-gray-600">
+          <div className="flex items-center space-x-3">
+            <h4 className="text-sm font-semibold text-gray-600 flex items-center space-x-2 dark:text-gray-300">
+              <Code className="w-5 h-5 text-gray-500" />
+              <span>Languages:</span>
+            </h4>
+            <div className="flex space-x-3">
+              {repo.languages.nodes.slice(0, 3).map((language) => (
+                <div 
+                  key={language.name} 
+                  className="flex items-center space-x-2 bg-gray-100 px-3 py-1 rounded-full border border-gray-200 hover:bg-gray-200 transition-all dark:bg-gray-600 dark:border-gray-500 dark:hover:bg-gray-500"
+                >
+                  {LanguageIcons[language.name] || LanguageIcons['default']}
+                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
+                    {language.name}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <a 
+            href={repo.url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="github-button flex items-center justify-center w-full space-x-2 bg-gray-800 text-white py-2 rounded-lg shadow-lg hover:bg-gray-900 transition-all"
+          >
+            <Github className="w-5 h-5" />
+            <span>View on GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Projects = () => {
-  const [repos, setRepos] = useState<any[]>([]);
+  const [repos, setRepos] = useState<Repository[]>([]);
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchPinnedRepos = async () => {
@@ -74,47 +151,23 @@ const Projects = () => {
   }, []);
 
   return (
-    <div
+    <section 
+      id="projects" 
       ref={sectionRef}
-      className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in ${isVisible ? 'visible' : ''}`}
+      className={`min-h-screen flex flex-col justify-center py-16 px-4 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300 ${isVisible ? 'visible' : ''}`}
     >
-      {repos.map((repo) => (
-        <div key={repo.id} className="p-5 border rounded-lg shadow-lg flex flex-col justify-between h-full">
-          <div>
-            <h3 className="text-2xl font-bold font-mono whitespace-pre-wrap">{repo.name}</h3>
-            <p className="mt-2 font-mono whitespace-pre-wrap">{repo.description}</p>
-            <div className="mt-4 font-mono whitespace-pre-wrap">
-              <h4 className="font-bold font-mono whitespace-pre-wrap">Languages Used:</h4>
-              <ul>
-                {repo.languages.nodes.map((language: any) => (
-                  <li key={language.name}>{language.name}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <a 
-            href={repo.url} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="github-button mt-4 block self-center "
-          >
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              width="16" 
-              height="16" 
-              fill="currentColor" 
-              className="bi bi-github inline-block mr-2" 
-              viewBox="0 0 16 16"
-            >
-              <path 
-                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-              />
-            </svg>
-            View on GitHub
-          </a>
+      <div className="max-w-6xl mx-auto w-full">
+        <h2 className="text-5xl font-extrabold mb-12 text-center font-mono whitespace-pre-wrap text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400">
+          Projects
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in">
+          {repos.map((repo) => (
+            <ProjectCard key={repo.id} repo={repo} />
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </section>
   );
 };
 
